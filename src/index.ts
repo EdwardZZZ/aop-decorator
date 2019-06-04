@@ -68,6 +68,8 @@ export default function AOP(aspect: any): Function {
                     } else {
                         methodResult = await Promise.resolve(Reflect.apply(method, this, args));
                     }
+
+                    return methodResult;
                 };
 
                 if (Around) {

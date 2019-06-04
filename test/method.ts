@@ -15,7 +15,8 @@ class TestAspect extends Aspect {
     }
     async Around({ args, proceed }: any) {
         console.log('>>around args', ...args);
-        await proceed(...args);
+        const result = await proceed(...args);
+        console.log('》》', result);
         console.log('>>around after');
     }
 }
