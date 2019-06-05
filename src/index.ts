@@ -63,7 +63,7 @@ export default function AOP(aspect: any): Function {
                         try {
                             methodResult = await Promise.resolve(Reflect.apply(method, this, args));
                         } catch (err) {
-                            AfterThrowing(err);
+                            await Promise.resolve(Reflect.apply(AfterThrowing, aopInstance, [err]));
                         }
                     } else {
                         methodResult = await Promise.resolve(Reflect.apply(method, this, args));
@@ -78,7 +78,7 @@ export default function AOP(aspect: any): Function {
                         proceed,
                     };
 
-                    await Around(point);
+                    await Promise.resolve(Reflect.apply(Around, aopInstance, [point]));
                 } else {
                     await proceed();
                 }
