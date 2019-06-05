@@ -52,6 +52,7 @@ export default function AOP(aspect: any): Function {
                 const aopInstance = Reflect.construct(aspect, [this]);
                 const { Before, After, AfterReturning, AfterThrowing, Around } = aopInstance;
                 let methodResult: any;
+                let returnFlag = true;
 
                 const proceed = async () => {
                     if (Before) {
@@ -63,6 +64,7 @@ export default function AOP(aspect: any): Function {
                         try {
                             methodResult = await Promise.resolve(Reflect.apply(method, this, args));
                         } catch (err) {
+                            returnFlag = false;
                             await Promise.resolve(Reflect.apply(AfterThrowing, aopInstance, [err]));
                         }
                     } else {
@@ -87,7 +89,7 @@ export default function AOP(aspect: any): Function {
                     await Promise.resolve(Reflect.apply(After, aopInstance, []));
                 }
 
-                if (AfterReturning) {
+                if (AfterReturning && returnFlag) {
                     await Promise.resolve(Reflect.apply(AfterReturning, aopInstance, [methodResult]));
                 }
             },
