@@ -6,12 +6,12 @@ interface IAspect {
     AfterThrowing?(): void;
     Around?(): void;
 }
-[Aspect1] around advise 1
-[Aspect1] before advise
+[Aspect] around advise 1
+[Aspect] before advise
 test OK
-[Aspect1] around advise2
-[Aspect1] after advise
-[Aspect1] afterReturning advise
+[Aspect] around advise2
+[Aspect] after advise
+[Aspect] afterReturning advise
 */
 
 type JoinPoint = {
