@@ -20,7 +20,7 @@
     "eslint-plugin-typescript": "^0.14.0",
     "eslint-watch": "^4.0.2",
     "expect": "^24.1.0",
-    "mocha": "^5.2.0",
+    "mocha": "^10.2.0",
     "parallelshell": "^3.0.2",
     "ts-mocha": "^2.0.0",
     "typescript": "^3.2.2"
